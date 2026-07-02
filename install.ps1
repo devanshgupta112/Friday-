@@ -1,17 +1,30 @@
-Write-Host "=== Installing FridayLang ===" -ForegroundColor Green
+Write-Host "=== Installing FridayLang from Release ===" -ForegroundColor Green
 
-# Check for CMake
-if (-not (Get-Command "cmake" -ErrorAction SilentlyContinue)) {
-    Write-Error "Error: cmake is required but not installed."
-    Exit 1
+$InstallDir = Join-Path $HOME ".friday\bin"
+If (-not (Test-Path $InstallDir)) {
+    New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
 }
 
-# Create build directory and compile
-Write-Host "Configuring and building..." -ForegroundColor Cyan
-New-Item -ItemType Directory -Force -Path "build" | Out-Null
-cmake -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build --config Release
+$BinaryPath = Join-Path $InstallDir "friday.exe"
+$Url = "https://github.com/devanshgupta112/Friday-/releases/latest/download/friday-windows.exe"
 
-Write-Host "=== FridayLang Build Successful! ===" -ForegroundColor Green
-Write-Host "The binary is compiled at: build\Release\friday.exe" -ForegroundColor Green
-Write-Host "Please copy it to your custom Path directory to run 'friday' globally." -ForegroundColor Cyan
+Write-Host "Downloading FridayLang from $Url..." -ForegroundColor Cyan
+Invoke-WebRequest -Uri $Url -OutFile $BinaryPath
+
+# Add to user PATH variable
+$UserPath = [Environment]::GetEnvironmentVariable("Path", "User")
+if ($UserPath -notlike "*\.friday\bin*") {
+    $Delimiter = ";"
+    if ($UserPath.EndsWith($Delimiter)) {
+        $NewPath = $UserPath + $InstallDir
+    } else {
+        $NewPath = $UserPath + $Delimiter + $InstallDir
+    }
+    [Environment]::SetEnvironmentVariable("Path", $NewPath, "User")
+    Write-Host "Added $InstallDir to user PATH variable." -ForegroundColor Green
+    Write-Host "Please restart your PowerShell window to apply changes." -ForegroundColor Cyan
+} else {
+    Write-Host "$InstallDir is already present in PATH." -ForegroundColor Green
+}
+
+Write-Host "=== FridayLang Installation Successful! ===" -ForegroundColor Green

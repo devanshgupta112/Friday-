@@ -1,28 +1,50 @@
 #!/usr/bin/env bash
 set -e
 
-echo "=== Installing FridayLang ==="
+echo "=== Installing FridayLang from Release ==="
 
-# Check for CMake
-if ! command -v cmake &> /dev/null; then
-    echo "Error: cmake is required but not installed."
+# Detect OS
+OS="$(uname -s)"
+if [ "$OS" = "Darwin" ]; then
+    BINARY="friday-macos"
+elif [ "$OS" = "Linux" ]; then
+    BINARY="friday-linux"
+else
+    echo "Unsupported OS: $OS"
     exit 1
 fi
 
-# Create build directory and compile
-echo "Configuring and building..."
-mkdir -p build
-cmake -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build --config Release
+INSTALL_DIR="$HOME/.friday/bin"
+mkdir -p "$INSTALL_DIR"
 
-# Copy binary to global path
-echo "Installing binary to /usr/local/bin/friday..."
-if [ -w /usr/local/bin ]; then
-    cp build/friday /usr/local/bin/friday
+URL="https://github.com/devanshgupta112/Friday-/releases/latest/download/$BINARY"
+echo "Downloading binary from $URL..."
+curl -fsSL "$URL" -o "$INSTALL_DIR/friday"
+chmod +x "$INSTALL_DIR/friday"
+
+# Add to PATH in shell rc file
+SHELL_RC=""
+if [ -f "$HOME/.zshrc" ]; then
+    SHELL_RC="$HOME/.zshrc"
+elif [ -f "$HOME/.bashrc" ]; then
+    SHELL_RC="$HOME/.bashrc"
+elif [ -f "$HOME/.profile" ]; then
+    SHELL_RC="$HOME/.profile"
+fi
+
+if [ -n "$SHELL_RC" ]; then
+    if ! grep -q '\.friday/bin' "$SHELL_RC"; then
+        echo -e '\n# FridayLang PATH config\nexport PATH="$HOME/.friday/bin:$PATH"' >> "$SHELL_RC"
+        echo "Added $INSTALL_DIR to PATH in $SHELL_RC"
+        echo "Please run: source $SHELL_RC to apply changes to current terminal."
+    else
+        echo "$INSTALL_DIR is already configured in $SHELL_RC"
+    fi
 else
-    echo "Requires administrator privileges to copy to /usr/local/bin/friday."
-    sudo cp build/friday /usr/local/bin/friday
+    echo "Could not auto-detect shell config file."
+    echo "Please add the following line manually to your shell rc file:"
+    echo 'export PATH="$HOME/.friday/bin:$PATH"'
 fi
 
 echo "=== FridayLang Installation Successful! ==="
-echo "You can now run FridayLang scripts using: friday <script.fry>"
+echo "Run 'friday' to start."
