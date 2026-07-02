@@ -29,7 +29,20 @@ This compiles the `friday` compiler executable inside the `build` directory.
 
 ## **Installation**
 
-Run the appropriate install script from the root directory:
+### **1. Quick One-Line Install (Recommended)**
+You can install FridayLang globally without cloning the repository by running the following command in your terminal:
+
+*   **macOS / Linux**:
+    ```bash
+    curl -fsSL https://raw.githubusercontent.com/devanshgupta112/Friday-/main/install.sh | bash
+    ```
+*   **Windows (PowerShell)**:
+    ```powershell
+    irm https://raw.githubusercontent.com/devanshgupta112/Friday-/main/install.ps1 | iex
+    ```
+
+### **2. Local Install (from Cloned Repo)**
+If you have cloned the repository locally, run the appropriate script from the project root:
 
 *   **macOS / Linux**:
     ```bash
