@@ -1,0 +1,8 @@
+hey friday
+take n 5;
+array arr n;
+arr.in(10, 20, 30, 40, 50);
+
+for take i 0; i < arr.size(); i++ {
+    print arr[i];
+}

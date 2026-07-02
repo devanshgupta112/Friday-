@@ -1,0 +1,43 @@
+hey friday
+
+take n 5;
+
+array arr n;
+
+arr.in(12, 14, 1, 4, 1, 4);
+
+print "Original";
+arr.out();
+
+arr.sort();
+
+print "Sorted";
+arr.out();
+
+arr.push(100);
+
+print arr.back();
+
+print arr.size();
+
+print arr.max();
+
+print arr.min();
+
+print arr.sum();
+
+print arr.avg();
+
+arr.reverse();
+
+arr.out();
+
+print "--- Testing Loops & Strings ---";
+foreach x in arr {
+    print x;
+}
+
+take s "Hello";
+print s.length();
+s.reverse();
+print s;

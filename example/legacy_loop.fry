@@ -1,0 +1,12 @@
+hey friday
+
+x = 5;
+print "Count up:";
+loop i from 1 to x {
+    print i;
+}
+
+print "Count down:";
+loop j from x to 1 {
+    print j;
+}

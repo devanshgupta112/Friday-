@@ -1,0 +1,17 @@
+hey friday
+
+x = 10;
+y = 20;
+
+if (x < y) {
+    print "x is less than y";
+} else {
+    print "x is not less than y";
+}
+
+z = x + y;
+print "x + y = " + z;
+
+msg = "Hello";
+name = " Friday";
+print msg + name;

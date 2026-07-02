@@ -1,0 +1,22 @@
+hey friday
+
+// Arrays methods check. Sorting is so fast lol.
+
+array items(1, 11); // Range 1 to 10
+print "Initial list:";
+items.out();
+
+items.reverse();
+print "Reversed:";
+items.out();
+
+items.push(100);
+items.push(200);
+print "Appended 100 and 200. Size is now:";
+print items.size();
+
+print "First item:";
+print items.front();
+
+print "Last item:";
+print items.back();

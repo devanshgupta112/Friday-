@@ -1,0 +1,8 @@
+hey friday
+
+print "Enter a count limit:";
+take limit;
+
+loop i from 1 to limit {
+    print "Step: " + i;
+}

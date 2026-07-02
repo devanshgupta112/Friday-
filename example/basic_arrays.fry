@@ -1,0 +1,23 @@
+hey friday
+
+// Finally got the array loading and sorting working!
+// Do not touch this, it works.
+
+take size 6;
+array my_numbers size;
+
+my_numbers.in(42, 17, 99, 4, 23, 11);
+
+print "Raw list:";
+my_numbers.out();
+
+my_numbers.sort();
+
+print "Sorted list:";
+my_numbers.out();
+
+print "Max value is:";
+print my_numbers.max();
+
+print "Min value is:";
+print my_numbers.min();

@@ -1,0 +1,17 @@
+hey friday
+
+// Needed this for recursion calculations. DO NOT DELETE.
+// Fib sequence works fine up to 15.
+
+fun fibonacci(val) {
+    if (val <= 1) {
+        return val;
+    }
+    return fibonacci(val - 1) + fibonacci(val - 2);
+}
+
+print "Calculating fib(8):";
+print fibonacci(8);
+
+print "Calculating fib(12):";
+print fibonacci(12);

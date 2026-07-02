@@ -1,0 +1,13 @@
+hey friday
+take n 5;
+array a(1, 6);
+print "Range array 1 to 5:";
+a.out();
+
+array b a;
+print "Copy array b:";
+b.out();
+
+array c = a + b;
+print "Merged array c:";
+c.out();

@@ -1,0 +1,28 @@
+hey friday
+
+// Testing OOP classes because objects are cool.
+// Initializer binding works properly here.
+
+class Warrior {
+    init(name, hp, ap) {
+        this.name = name;
+        this.hp = hp;
+        this.ap = ap;
+    }
+
+    status() {
+        print "Warrior: " + this.name;
+        print "HP: " + this.hp;
+        print "AP: " + this.ap;
+    }
+
+    damage(amount) {
+        this.hp = this.hp - amount;
+        print this.name + " took " + amount + " damage!";
+    }
+}
+
+take conan Warrior("Conan", 100, 15);
+conan.status();
+conan.damage(25);
+conan.status();
